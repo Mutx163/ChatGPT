@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>课程表管理</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="branding">
+      <h1>我的课程表</h1>
+      <p>支持教务系统导入，自动生成适配手机与电脑的可视化课表。</p>
+    </div>
+    <div class="week-control">
+      <label for="week-selector">当前周次</label>
+      <div class="week-selector-wrapper">
+        <input id="week-selector" type="range" min="1" max="20" value="1">
+        <span id="week-display">第 1 周</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card" aria-labelledby="import-title">
+      <div class="card-header">
+        <h2 id="import-title">教务系统导入</h2>
+        <p class="card-subtitle">支持导入 CSV / TXT 文件，或直接粘贴课程数据。</p>
+      </div>
+      <div class="card-body import-area">
+        <label for="file-input" class="file-input">选择课表文件
+          <input id="file-input" type="file" accept=".csv,.txt">
+        </label>
+        <div class="divider">
+          <span>或</span>
+        </div>
+        <textarea id="raw-input" rows="8" placeholder="课程名称,教师,地点,星期,节次,周次&#10;高等数学,王老师,教学楼101,1,1-2,1-16&#10;大学英语,李老师,教学楼302,3,3-4,1-16(单)"></textarea>
+        <button id="import-button" class="primary">导入课程</button>
+        <details class="tips">
+          <summary>查看 CSV 格式说明</summary>
+          <p>每行代表一门课程，字段顺序分别为：</p>
+          <ol>
+            <li><strong>课程名称</strong></li>
+            <li><strong>任课教师</strong></li>
+            <li><strong>上课地点</strong></li>
+            <li><strong>星期</strong>（1-7 分别代表周一到周日）</li>
+            <li><strong>节次</strong>（如 1-2，表示第 1-2 节）</li>
+            <li><strong>周次</strong>（如 1-16、1-16(单)、2,4,6,8 等）</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="manual-title">
+      <div class="card-header">
+        <h2 id="manual-title">手动添加课程</h2>
+      </div>
+      <form id="course-form" class="card-body form-grid">
+        <label>课程名称
+          <input name="name" type="text" required placeholder="例如：数据结构">
+        </label>
+        <label>教师
+          <input name="teacher" type="text" placeholder="例如：张老师">
+        </label>
+        <label>地点
+          <input name="location" type="text" placeholder="例如：实验楼305">
+        </label>
+        <label>星期
+          <select name="day" required>
+            <option value="1">周一</option>
+            <option value="2">周二</option>
+            <option value="3">周三</option>
+            <option value="4">周四</option>
+            <option value="5">周五</option>
+            <option value="6">周六</option>
+            <option value="7">周日</option>
+          </select>
+        </label>
+        <label>开始节次
+          <input name="start" type="number" min="1" max="14" value="1" required>
+        </label>
+        <label>结束节次
+          <input name="end" type="number" min="1" max="14" value="2" required>
+        </label>
+        <label>周次
+          <input name="weeks" type="text" placeholder="例如：1-16 或 1-16(单)">
+        </label>
+        <button class="primary" type="submit">添加课程</button>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="schedule-title">
+      <div class="card-header">
+        <h2 id="schedule-title">本周课表</h2>
+        <p class="card-subtitle">选择不同周次即可查看对应课程安排。</p>
+      </div>
+      <div class="card-body">
+        <div class="schedule-grid" id="schedule-grid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>课程表将自动保存在浏览器中，方便下次快速查看。</p>
+    <button id="clear-storage" class="ghost">清空课表</button>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
