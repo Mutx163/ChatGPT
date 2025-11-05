@@ -1,0 +1,33 @@
+{
+  "name": "course-manager-app",
+  "version": "1.0.0",
+  "description": "大学课程表与作业管理系统 - Android应用",
+  "main": "index.js",
+  "scripts": {
+    "prepare:www": "mkdir -p www && cp index.html app.js style.css www/",
+    "build:android": "npm run prepare:www && cordova build android --release",
+    "build:android:debug": "npm run prepare:www && cordova build android --debug"
+  },
+  "keywords": [
+    "course",
+    "schedule",
+    "homework",
+    "management",
+    "android"
+  ],
+  "author": "Course Manager Team",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova": "^12.0.0",
+    "cordova-android": "^12.0.1"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-file": {}
+    }
+  }
+}
