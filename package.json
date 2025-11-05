@@ -27,8 +27,7 @@
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-file": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-file": {}
     }
   }
 }
