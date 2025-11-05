@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.coursemanager.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>课程表管理</name>
+    <description>
+        大学课程表与作业管理系统 - 专为大学生设计的课程和作业管理工具
+    </description>
+    <author email="dev@coursemanager.com" href="https://github.com">
+        Course Manager Team
+    </author>
+    
+    <content src="index.html" />
+    
+    <access origin="*" />
+    
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <platform name="android">
+        <allow-intent href="market:*" />
+        
+        <!-- Android版本配置 -->
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="33" />
+        
+        <!-- 应用图标配置 -->
+        <icon density="ldpi" src="res/icon/android/ldpi.png" />
+        <icon density="mdpi" src="res/icon/android/mdpi.png" />
+        <icon density="hdpi" src="res/icon/android/hdpi.png" />
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
+        
+        <!-- 启动画面配置 -->
+        <splash density="land-ldpi" src="res/screen/android/splash-land-ldpi.png" />
+        <splash density="land-mdpi" src="res/screen/android/splash-land-mdpi.png" />
+        <splash density="land-hdpi" src="res/screen/android/splash-land-hdpi.png" />
+        <splash density="land-xhdpi" src="res/screen/android/splash-land-xhdpi.png" />
+        <splash density="land-xxhdpi" src="res/screen/android/splash-land-xxhdpi.png" />
+        <splash density="land-xxxhdpi" src="res/screen/android/splash-land-xxxhdpi.png" />
+        <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
+        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
+        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
+        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <splash density="port-xxhdpi" src="res/screen/android/splash-port-xxhdpi.png" />
+        <splash density="port-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png" />
+    </platform>
+    
+    <!-- 全局配置 -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackgroundColor" value="0xff667eea" />
+    <preference name="Orientation" value="default" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    
+    <!-- 允许访问本地存储 -->
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    
+    <!-- Cordova插件 -->
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.5" />
+    <plugin name="cordova-plugin-file" spec="^8.0.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="^6.0.2" />
+</widget>
