@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学课程表与作业管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <header class="header">
+            <h1>📚 课程表与作业管理</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="addCourseBtn">➕ 添加课程</button>
+                <button class="btn btn-primary" id="addHomeworkBtn">📝 添加作业</button>
+                <button class="btn btn-secondary" id="importBtn">📥 导入ICS</button>
+                <button class="btn btn-secondary" id="exportBtn">📤 导出ICS</button>
+            </div>
+        </header>
+
+        <!-- 视图切换和导航 -->
+        <div class="toolbar">
+            <div class="view-switcher">
+                <button class="view-btn active" data-view="day">日视图</button>
+                <button class="view-btn" data-view="week">周视图</button>
+                <button class="view-btn" data-view="overview">总览</button>
+            </div>
+            <div class="date-navigation">
+                <button class="nav-btn" id="prevBtn">◀</button>
+                <span class="current-date" id="currentDate"></span>
+                <button class="nav-btn" id="nextBtn">▶</button>
+                <button class="btn btn-small" id="todayBtn">今天</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 日视图 -->
+            <div class="view-container active" id="dayView">
+                <div class="time-grid" id="dayTimeGrid"></div>
+            </div>
+
+            <!-- 周视图 -->
+            <div class="view-container" id="weekView">
+                <div class="week-grid" id="weekGrid"></div>
+            </div>
+
+            <!-- 总览视图 -->
+            <div class="view-container" id="overviewView">
+                <div class="overview-container">
+                    <div class="overview-section">
+                        <h2>📅 课程列表</h2>
+                        <div class="course-list" id="courseList"></div>
+                    </div>
+                    <div class="overview-section">
+                        <h2>📋 作业列表</h2>
+                        <div class="homework-list" id="homeworkList"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 添加课程模态框 -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="courseModalTitle">添加课程</h2>
+                <button class="close-btn" data-modal="courseModal">×</button>
+            </div>
+            <form id="courseForm">
+                <input type="hidden" id="courseId">
+                <div class="form-group">
+                    <label>课程名称 *</label>
+                    <input type="text" id="courseName" required>
+                </div>
+                <div class="form-group">
+                    <label>教师</label>
+                    <input type="text" id="courseTeacher">
+                </div>
+                <div class="form-group">
+                    <label>地点</label>
+                    <input type="text" id="courseLocation">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>星期 *</label>
+                        <select id="courseDay" required>
+                            <option value="1">星期一</option>
+                            <option value="2">星期二</option>
+                            <option value="3">星期三</option>
+                            <option value="4">星期四</option>
+                            <option value="5">星期五</option>
+                            <option value="6">星期六</option>
+                            <option value="0">星期日</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>开始时间 *</label>
+                        <input type="time" id="courseStartTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>结束时间 *</label>
+                        <input type="time" id="courseEndTime" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>颜色</label>
+                    <input type="color" id="courseColor" value="#4CAF50">
+                </div>
+                <div class="form-group">
+                    <label>备注</label>
+                    <textarea id="courseNotes" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-modal="courseModal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 添加作业模态框 -->
+    <div class="modal" id="homeworkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="homeworkModalTitle">添加作业</h2>
+                <button class="close-btn" data-modal="homeworkModal">×</button>
+            </div>
+            <form id="homeworkForm">
+                <input type="hidden" id="homeworkId">
+                <div class="form-group">
+                    <label>作业标题 *</label>
+                    <input type="text" id="homeworkTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>相关课程</label>
+                    <input type="text" id="homeworkCourse">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>截止日期 *</label>
+                        <input type="date" id="homeworkDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>截止时间</label>
+                        <input type="time" id="homeworkTime" value="23:59">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>优先级</label>
+                    <select id="homeworkPriority">
+                        <option value="low">低</option>
+                        <option value="medium" selected>中</option>
+                        <option value="high">高</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>状态</label>
+                    <select id="homeworkStatus">
+                        <option value="pending">待完成</option>
+                        <option value="in-progress">进行中</option>
+                        <option value="completed">已完成</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>描述</label>
+                    <textarea id="homeworkDescription" rows="4"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-modal="homeworkModal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 隐藏的文件输入 -->
+    <input type="file" id="fileInput" accept=".ics" style="display: none;">
+
+    <script src="app.js"></script>
+</body>
+</html>
