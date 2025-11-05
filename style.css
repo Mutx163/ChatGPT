@@ -521,31 +521,285 @@ form {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 12px;
+    }
+
+    /* 头部优化 */
     .header {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        padding: 20px 15px;
         text-align: center;
     }
 
-    .header-actions {
-        flex-wrap: wrap;
-        justify-content: center;
+    .header h1 {
+        font-size: 20px;
     }
 
+    .header-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .header-actions .btn {
+        padding: 10px 12px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    /* 工具栏优化 */
     .toolbar {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
+        padding: 15px;
     }
 
+    .view-switcher {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .view-btn {
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    .date-navigation {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .current-date {
+        font-size: 14px;
+        min-width: auto;
+        flex: 1;
+    }
+
+    .nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .btn-small {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* 主内容区优化 */
+    .main-content {
+        padding: 15px;
+        min-height: 400px;
+    }
+
+    /* 时间网格优化 */
+    .time-grid {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .week-grid {
+        grid-template-columns: 50px repeat(7, minmax(80px, 1fr));
+        overflow-x: auto;
+    }
+
+    .time-label {
+        font-size: 11px;
+        padding: 8px 4px;
+    }
+
+    .time-slot {
+        min-height: 50px;
+        padding: 8px;
+    }
+
+    .day-header {
+        min-height: 50px;
+        padding: 8px;
+    }
+
+    .day-header .day-name {
+        font-size: 12px;
+    }
+
+    .day-header .day-date {
+        font-size: 16px;
+    }
+
+    /* 事件卡片优化 */
+    .event-card {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .event-card .event-title {
+        font-size: 12px;
+    }
+
+    .event-card .event-time,
+    .event-card .event-location {
+        font-size: 10px;
+    }
+
+    /* 总览视图优化 */
     .overview-container {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .overview-section h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .course-item, .homework-item {
+        padding: 15px;
+        border-left-width: 3px;
+    }
+
+    .course-item h3, .homework-item h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .course-item .course-info, 
+    .homework-item .homework-info {
+        font-size: 13px;
+    }
+
+    .item-actions {
+        flex-wrap: wrap;
+    }
+
+    .item-actions button {
+        flex: 1;
+        min-width: 70px;
+    }
+
+    /* 模态框优化 */
+    .modal-content {
+        width: 95%;
+        max-width: 100%;
+        margin: 10px;
+        max-height: 95vh;
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    form {
+        padding: 20px;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .modal-footer {
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .modal-footer .btn {
+        flex: 1;
+        padding: 12px;
+    }
+
+    /* 空状态优化 */
+    .empty-state {
+        padding: 40px 15px;
+    }
+
+    .empty-state-icon {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+
+    .empty-state-text {
+        font-size: 14px;
+    }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .header {
+        padding: 15px 10px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .toolbar {
+        padding: 10px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .time-grid {
+        grid-template-columns: 50px 1fr;
     }
 
     .week-grid {
-        overflow-x: auto;
+        grid-template-columns: 45px repeat(7, minmax(70px, 1fr));
+    }
+
+    .view-btn {
+        font-size: 12px;
+        padding: 8px 6px;
+    }
+
+    .current-date {
+        font-size: 13px;
+    }
+
+    .course-item, .homework-item {
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 98%;
+        margin: 5px;
+    }
+
+    form {
+        padding: 15px;
     }
 }
